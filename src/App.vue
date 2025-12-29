@@ -49,7 +49,7 @@ template {
   height: 60px;
   position: absolute;
   right: 8vw;
-  bottom: 13vh;
+  bottom: 13.5vh;
 }
 
 .location-box {
