@@ -3,6 +3,7 @@ import PartyMembers from "./Components/PartyMembers.vue";
 import SelectionList from "./Components/SelectionList.vue";
 import GameStats from "./Components/GameStats.vue";
 import Location from "./Components/Location.vue";
+// List of Players ... also need to declare a player type
 </script>
 
 <template>
@@ -45,6 +46,7 @@ import Location from "./Components/Location.vue";
   position: absolute;
   top: 5vh;
   left: 3.5vw;
+  overflow: hidden;
 }
 
 .selections-list {
@@ -58,24 +60,27 @@ import Location from "./Components/Location.vue";
 
 .time-stats {
   z-index: 10;
-  width: 20%;
-  height: 80px;
+  width: 21%;
+  height: 12vh;
   position: absolute;
   right: 8vw;
   bottom: 13.5vh;
+  margin-top: 0px;
+  margin-left: 2rem;
   display: flex;
-  justify-content: start;
-  align-items: center;
-  padding-top: 0%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: space-between;
+  padding: 0 0 0 0;
 }
 
 .location-box {
   z-index: 10;
-  height: 30px;
+  height: 3rem;
   width: 40%;
   position: absolute;
   right: 8vw;
-  bottom: 6vh;
+  bottom: 5vh;
   display: flex;
   justify-content: start;
   align-items: center;

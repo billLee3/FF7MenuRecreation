@@ -1,11 +1,16 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const location = ref("Nibelheim");
+</script>
 
 <template>
-  <div>Location</div>
+  <h3>{{ location }}</h3>
 </template>
 
 <style scoped>
-div {
+h3 {
+  font-size: 2rem;
   color: white;
 }
 </style>

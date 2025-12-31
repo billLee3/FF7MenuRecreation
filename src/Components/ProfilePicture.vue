@@ -1,13 +1,20 @@
-<script setup></script>
+<script setup lang="ts">
+import { ref, computed } from "vue";
+
+const props = defineProps(["imageName"]);
+const imgSrc = computed(() => {
+  return new URL(`../assets/${props.imageName}`, import.meta.url).href;
+});
+</script>
 
 <template>
-  <img src="../assets/CloudProfile.png" alt="Profile Image of Cloud" />
+  <img :src="imgSrc" alt="Dynamic Profile" />
 </template>
 
 <style scoped>
 img {
-  height: 150px;
-  width: 150px;
+  height: 250px;
+  width: 250px;
   object-fit: cover;
   object-position: top;
   image-rendering: pixelated;

@@ -1,11 +1,100 @@
-<script setup>
+<script setup lang="ts">
 import PartyMember from "./PartyMember.vue";
+import { computed, ref } from "vue";
+import type { Character } from "@/types/character";
+
+const characters = ref<Character[]>([
+  {
+    id: 1,
+    name: "Cloud",
+    level: 21,
+    maxHp: 500,
+    currentHp: 400,
+    maxMp: 250,
+    currentMp: 150,
+    limitLvl: 1,
+    limitExpMax: 300,
+    limitExpCurrent: 150,
+    expTotalToNextLvl: 1000,
+    currentExpToNextLvl: 200,
+    imagePath: "CloudProfile.png",
+    inParty: true,
+  },
+  {
+    id: 2,
+    name: "Aerith",
+    level: 21,
+    maxHp: 500,
+    currentHp: 400,
+    maxMp: 250,
+    currentMp: 150,
+    limitLvl: 1,
+    limitExpMax: 300,
+    limitExpCurrent: 200,
+    expTotalToNextLvl: 1000,
+    currentExpToNextLvl: 200,
+    imagePath: "AerithProfile.png",
+    inParty: false,
+  },
+  {
+    id: 3,
+    name: "RedXIII",
+    level: 21,
+    maxHp: 500,
+    currentHp: 400,
+    maxMp: 250,
+    currentMp: 150,
+    limitLvl: 1,
+    limitExpMax: 300,
+    limitExpCurrent: 200,
+    expTotalToNextLvl: 1000,
+    currentExpToNextLvl: 200,
+    imagePath: "RedXIIIProfile.png",
+    inParty: true,
+  },
+  {
+    id: 4,
+    name: "Barrett",
+    level: 21,
+    maxHp: 500,
+    currentHp: 400,
+    maxMp: 250,
+    currentMp: 150,
+    limitLvl: 1,
+    limitExpMax: 300,
+    limitExpCurrent: 200,
+    expTotalToNextLvl: 1000,
+    currentExpToNextLvl: 200,
+    imagePath: "BarrettProfile.png",
+    inParty: false,
+  },
+  {
+    id: 5,
+    name: "Tifa",
+    level: 21,
+    maxHp: 500,
+    currentHp: 400,
+    maxMp: 250,
+    currentMp: 150,
+    limitLvl: 1,
+    limitExpMax: 300,
+    limitExpCurrent: 200,
+    expTotalToNextLvl: 1000,
+    currentExpToNextLvl: 200,
+    imagePath: "TifaProfile.png",
+    inParty: true,
+  },
+]);
+
+const partyMembers = computed(() => {
+  return characters.value.filter((char) => char.inParty);
+});
 </script>
 
 <template>
-  <div class="container">
+  <div v-for="(character, index) in partyMembers" :key="index" class="column">
     <div class="row">
-      <PartyMember />
+      <PartyMember :character="character" :key="index" />
     </div>
   </div>
 </template>
@@ -14,7 +103,7 @@ import PartyMember from "./PartyMember.vue";
 div {
   color: white;
 }
-.container {
+.column {
   display: flex;
   display: column;
   align-items: center;
@@ -25,10 +114,10 @@ div {
 .row {
   display: flex;
   width: 100%;
-  height: 160px;
+  height: 100%;
   margin-left: 1%;
   flex-direction: row;
+  gap: 60px;
   align-items: center;
-  border: 1px solid white;
 }
 </style>
