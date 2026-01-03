@@ -3,7 +3,26 @@ import PartyMembers from "./Components/PartyMembers.vue";
 import SelectionList from "./Components/SelectionList.vue";
 import GameStats from "./Components/GameStats.vue";
 import Location from "./Components/Location.vue";
-// List of Players ... also need to declare a player type
+import { ref } from "vue";
+
+// Also need the players objects in global state.
+// Global state not related to specific components more than 1 level down the DOM tree.
+const location = ref("Nibelheim");
+const timePlayed = ref("05:10:32");
+const gil = ref(14510);
+
+const selectionList = ref<string[]>([
+  "Items",
+  "Materia",
+  "Equip",
+  "Status",
+  "Order",
+  "Limit",
+  "About",
+  "",
+  "Save",
+  "Quit",
+]);
 </script>
 
 <template>
@@ -12,13 +31,13 @@ import Location from "./Components/Location.vue";
       <PartyMembers />
     </div>
     <div class="menu-box selections-list">
-      <SelectionList />
+      <SelectionList :selections="selectionList" />
     </div>
     <div class="menu-box time-stats">
-      <GameStats />
+      <GameStats :time-played="timePlayed" :gil />
     </div>
     <div class="menu-box location-box">
-      <Location />
+      <Location :location="location" />
     </div>
   </div>
 </template>

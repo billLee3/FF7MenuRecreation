@@ -1,21 +1,24 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
-const level = ref(8);
+interface Props {
+  name: string;
+  level: number;
+  hpMax: number;
+  hpRemaining: number;
+  mpMax: number;
+  mpRemaining: number;
+}
 
-const hpMax = ref(4000);
-const hpRemaining = ref(3000);
-
-const mpMax = ref(333);
-const mpRemaining = ref(111);
+const props = defineProps<Props>();
 
 const hpWidth = computed(() => {
-  const percentage = (hpRemaining.value / hpMax.value) * 100;
+  const percentage: number = (props.hpRemaining / props.hpMax) * 100;
   return `${percentage}%`;
 });
 
 const mpWidth = computed(() => {
-  const percentage = (mpRemaining.value / mpMax.value) * 100;
+  const percentage: number = (props.mpRemaining / props.mpMax) * 100;
   return `${percentage}%`;
 });
 </script>
@@ -23,20 +26,20 @@ const mpWidth = computed(() => {
 <template>
   <div class="column">
     <div class="row">
-      <h3 class="characterName">Cloud</h3>
+      <h3 class="characterName">{{ props.name }}</h3>
     </div>
 
     <div class="row">
       <h4 class="level"><b>LV</b></h4>
       <p>
-        <b>{{ level }}</b>
+        <b>{{ props.level }}</b>
       </p>
     </div>
 
     <div class="row">
       <h4 class="HP"><b>HP</b></h4>
       <p>
-        <b>{{ hpRemaining }}/{{ hpMax }}</b>
+        <b>{{ props.hpRemaining }}/{{ props.hpMax }}</b>
       </p>
     </div>
     <hr class="hpLine" />
@@ -44,7 +47,7 @@ const mpWidth = computed(() => {
     <div class="row">
       <h4 class="MP"><b>MP</b></h4>
       <p>
-        <b>{{ mpRemaining }}/{{ mpMax }}</b>
+        <b>{{ props.mpRemaining }}/{{ props.mpMax }}</b>
       </p>
     </div>
     <hr class="mpLine" />

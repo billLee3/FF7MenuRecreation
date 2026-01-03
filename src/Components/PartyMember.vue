@@ -3,28 +3,40 @@ import PartyMemberStats from "./PartyMemberStats.vue";
 import ProfilePicture from "./ProfilePicture.vue";
 import ProgressBar from "./ProgressBar.vue";
 import type { Character } from "@/types/character";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
-const props = defineProps<{ character: Character }>();
+interface Props {
+  character: Character;
+}
+const props = defineProps<Props>();
+// const lmtString = ref(`Limit level ${props.character.limitLvl}`);
 
-const lmtString = ref(`Limit level ${props.character.limitLvl}`);
-const currentExp = ref(props.character.currentExpToNextLvl);
-const expTotalToNextLvl = ref(props.character.expTotalToNextLvl);
-const currentLmtExp = ref(props.character.limitExpCurrent);
-const LmtExpMax = ref(props.character.limitExpMax);
-const filePath = ref(props.character.imagePath);
+const lmtString = computed(() => {
+  return `Limit level ${props.character.limitLvl}`;
+});
 </script>
 
 <template>
-  <ProfilePicture :image-name="filePath" />
-  <PartyMemberStats />
+  <ProfilePicture :image-name="props.character.imagePath" />
+  <PartyMemberStats
+    :name="props.character.name"
+    :level="props.character.level"
+    :hp-max="props.character.maxHp"
+    :hp-remaining="props.character.currentHp"
+    :mp-max="props.character.maxMp"
+    :mp-remaining="props.character.currentMp"
+  />
   <div class="column">
     <ProgressBar
       title="next level"
-      :current="currentExp"
-      :max="expTotalToNextLvl"
+      :current="props.character.currentExpToNextLvl"
+      :max="props.character.expTotalToNextLvl"
     />
-    <ProgressBar :title="lmtString" :current="currentLmtExp" :max="LmtExpMax" />
+    <ProgressBar
+      :title="lmtString"
+      :current="props.character.limitExpCurrent"
+      :max="props.character.limitExpMax"
+    />
   </div>
 </template>
 

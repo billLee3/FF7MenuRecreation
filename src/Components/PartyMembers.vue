@@ -7,12 +7,12 @@ const characters = ref<Character[]>([
   {
     id: 1,
     name: "Cloud",
-    level: 21,
+    level: 23,
     maxHp: 500,
     currentHp: 400,
     maxMp: 250,
     currentMp: 150,
-    limitLvl: 1,
+    limitLvl: 4,
     limitExpMax: 300,
     limitExpCurrent: 150,
     expTotalToNextLvl: 1000,
@@ -40,10 +40,10 @@ const characters = ref<Character[]>([
     id: 3,
     name: "RedXIII",
     level: 21,
-    maxHp: 500,
-    currentHp: 400,
-    maxMp: 250,
-    currentMp: 150,
+    maxHp: 600,
+    currentHp: 300,
+    maxMp: 400,
+    currentMp: 110,
     limitLvl: 1,
     limitExpMax: 300,
     limitExpCurrent: 200,
@@ -57,7 +57,7 @@ const characters = ref<Character[]>([
     name: "Barrett",
     level: 21,
     maxHp: 500,
-    currentHp: 400,
+    currentHp: 500,
     maxMp: 250,
     currentMp: 150,
     limitLvl: 1,
@@ -66,7 +66,7 @@ const characters = ref<Character[]>([
     expTotalToNextLvl: 1000,
     currentExpToNextLvl: 200,
     imagePath: "BarrettProfile.png",
-    inParty: false,
+    inParty: true,
   },
   {
     id: 5,
@@ -80,9 +80,9 @@ const characters = ref<Character[]>([
     limitExpMax: 300,
     limitExpCurrent: 200,
     expTotalToNextLvl: 1000,
-    currentExpToNextLvl: 200,
+    currentExpToNextLvl: 600,
     imagePath: "TifaProfile.png",
-    inParty: true,
+    inParty: false,
   },
 ]);
 
@@ -94,7 +94,7 @@ const partyMembers = computed(() => {
 <template>
   <div v-for="(character, index) in partyMembers" :key="index" class="column">
     <div class="row">
-      <PartyMember :character="character" :key="index" />
+      <PartyMember :character :key="index" />
     </div>
   </div>
 </template>

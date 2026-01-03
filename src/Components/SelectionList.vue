@@ -1,28 +1,22 @@
-<script setup></script>
+<script setup lang="ts">
+const props = defineProps<{ selections: string[] }>();
+</script>
 
 <template>
   <div>
-    <RouterLink to="/about">Items</RouterLink>
-    <RouterLink>Materia</RouterLink>
-    <RouterLink>Equip</RouterLink>
-    <RouterLink>Status</RouterLink>
-    <RouterLink>Order</RouterLink>
-    <RouterLink>Limit</RouterLink>
-    <RouterLink>About</RouterLink>
-    <p></p>
-    <RouterLink>Save</RouterLink>
-    <RouterLink>Quit</RouterLink>
+    <RouterLink to="/about" class="routerLink">About</RouterLink>
   </div>
+
+  <RouterView />
 </template>
 
 <style scoped>
-div {
+.routerLink {
   color: white;
-}
-RouterLink {
+  text-decoration: none;
   font-style: "Reactor7", sans-serif;
   padding-bottom: 10px;
-  font-size: 2.25rem;
+  font-size: 2rem;
   list-style-type: none;
 }
 div {
@@ -30,6 +24,7 @@ div {
   flex-direction: column;
   margin-left: 3em;
   margin-top: 5px;
+  gap: 0;
 }
 
 p {

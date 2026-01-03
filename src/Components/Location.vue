@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
-const location = ref("Nibelheim");
+const props = defineProps<{ location: String }>();
 </script>
 
 <template>

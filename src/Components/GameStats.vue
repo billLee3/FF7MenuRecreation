@@ -1,20 +1,20 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
-const timePlayed = ref("05:10:32");
-const gil = ref(14510);
+
+const props = defineProps<{ timePlayed: String; gil: number }>();
 </script>
 
 <template>
   <div class="row">
     <p>Time</p>
     <p class="timeValue">
-      <b>{{ timePlayed }}</b>
+      <b>{{ props.timePlayed }}</b>
     </p>
   </div>
   <div class="row gilRow">
     <p>Gil</p>
     <p class="gilValue">
-      <b>{{ gil }}</b>
+      <b>{{ props.gil }}</b>
     </p>
   </div>
 </template>
