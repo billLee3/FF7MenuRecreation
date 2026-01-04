@@ -1,5 +1,7 @@
 <script setup></script>
 
-<template></template>
+<template>
+  <button>I am here</button>
+</template>
 
 <style scoped></style>

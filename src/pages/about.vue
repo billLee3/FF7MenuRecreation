@@ -1,13 +1,11 @@
-<script>
-export default {
-  methods: {
-    goToAbout() {
-      this.$router.push("/about");
-    },
-  },
-};
+<script setup lang="ts">
+import router from "../router";
+
+function goToAbout() {
+  router.push("/about");
+}
 </script>
 
 <template>
-  <button @click="" goToAbout>Here I am</button>
+  <button @click="goToAbout">Here I am</button>
 </template>

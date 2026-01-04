@@ -4,10 +4,10 @@ const props = defineProps<{ selections: string[] }>();
 
 <template>
   <div>
+    <RouterLink to="/items" class="routerLink">Items</RouterLink>
+    <RouterLink to="/materia" class="routerLink">Materia</RouterLink>
     <RouterLink to="/about" class="routerLink">About</RouterLink>
   </div>
-
-  <RouterView />
 </template>
 
 <style scoped>

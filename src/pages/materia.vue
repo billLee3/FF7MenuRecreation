@@ -1,5 +1,7 @@
 <script setup></script>
 
-<template></template>
+<template>
+  <button>I am materia</button>
+</template>
 
 <style scoped></style>
