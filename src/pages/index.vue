@@ -31,7 +31,7 @@ const gil = ref(14510);
 </template>
 
 <style scoped>
-.container {
+/* .container {
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -45,7 +45,7 @@ const gil = ref(14510);
   padding-left: 1%;
   padding-top: 1%;
   font-family: "Reactor7", sans-serif;
-}
+} */
 
 .party-members {
   width: 70vw;
@@ -55,7 +55,7 @@ const gil = ref(14510);
   left: 3.5vw;
   overflow: hidden;
 }
-
+/* 
 .selections-list {
   z-index: 10;
   width: 20%;
@@ -93,6 +93,6 @@ const gil = ref(14510);
   align-items: center;
   padding-left: 2%;
   padding-top: 0.5%;
-  padding-bottom: 0.5%;
-}
+  padding-bottom: 0.5%; 
+} */
 </style>

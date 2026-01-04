@@ -3,7 +3,8 @@ const props = defineProps<{ selections: string[] }>();
 </script>
 
 <template>
-  <div>
+  <div class="navBar">
+    <RouterLink to="/" class="routerLink">Home</RouterLink>
     <RouterLink to="/items" class="routerLink">Items</RouterLink>
     <RouterLink to="/materia" class="routerLink">Materia</RouterLink>
     <RouterLink to="/about" class="routerLink">About</RouterLink>
@@ -19,7 +20,7 @@ const props = defineProps<{ selections: string[] }>();
   font-size: 2rem;
   list-style-type: none;
 }
-div {
+.navBar {
   display: flex;
   flex-direction: column;
   margin-left: 3em;
