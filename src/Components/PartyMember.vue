@@ -18,14 +18,17 @@ const lmtString = computed(() => {
 
 <template>
   <ProfilePicture :image-name="props.character.imagePath" />
-  <PartyMemberStats
-    :name="props.character.name"
-    :level="props.character.level"
-    :hp-max="props.character.maxHp"
-    :hp-remaining="props.character.currentHp"
-    :mp-max="props.character.maxMp"
-    :mp-remaining="props.character.currentMp"
-  />
+  <div class="statsColumn">
+    <PartyMemberStats
+      :name="props.character.name"
+      :level="props.character.level"
+      :hp-max="props.character.maxHp"
+      :hp-remaining="props.character.currentHp"
+      :mp-max="props.character.maxMp"
+      :mp-remaining="props.character.currentMp"
+    />
+  </div>
+
   <div class="column">
     <ProgressBar
       title="next level"
@@ -46,5 +49,12 @@ const lmtString = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.statsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 2rem;
 }
 </style>

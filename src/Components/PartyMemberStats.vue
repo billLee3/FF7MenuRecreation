@@ -24,44 +24,43 @@ const mpWidth = computed(() => {
 </script>
 
 <template>
-  <div class="column">
-    <div class="row">
-      <h3 class="characterName">{{ props.name }}</h3>
-    </div>
-
-    <div class="row">
-      <h4 class="level"><b>LV</b></h4>
-      <p>
-        <b>{{ props.level }}</b>
-      </p>
-    </div>
-
-    <div class="row">
-      <h4 class="HP"><b>HP</b></h4>
-      <p>
-        <b>{{ props.hpRemaining }}/{{ props.hpMax }}</b>
-      </p>
-    </div>
-    <hr class="hpLine" />
-
-    <div class="row">
-      <h4 class="MP"><b>MP</b></h4>
-      <p>
-        <b>{{ props.mpRemaining }}/{{ props.mpMax }}</b>
-      </p>
-    </div>
-    <hr class="mpLine" />
+  <div class="row">
+    <h3 class="characterName">{{ props.name }}</h3>
   </div>
+
+  <div class="row">
+    <h4 class="level"><b>LV</b></h4>
+    <p>
+      <b>{{ props.level }}</b>
+    </p>
+  </div>
+
+  <div class="row">
+    <h4 class="HP"><b>HP</b></h4>
+    <p>
+      <b>{{ props.hpRemaining }}/{{ props.hpMax }}</b>
+    </p>
+  </div>
+  <hr class="hpLine" />
+
+  <div class="row">
+    <h4 class="MP"><b>MP</b></h4>
+    <p>
+      <b>{{ props.mpRemaining }}/{{ props.mpMax }}</b>
+    </p>
+  </div>
+  <hr class="mpLine" />
 </template>
 
 <style scoped>
 div {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: start;
   color: white;
   background-color: transparent;
 }
+
 .column {
   display: flex;
   flex-direction: column;

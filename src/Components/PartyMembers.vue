@@ -117,7 +117,7 @@ div {
   height: 100%;
   margin-left: 1%;
   flex-direction: row;
-  gap: 60px;
+  justify-content: space-between;
   align-items: center;
 }
 </style>
