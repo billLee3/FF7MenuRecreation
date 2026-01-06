@@ -1,10 +1,51 @@
 <script setup lang="ts">
+import ItemList from "@/Components/ItemList.vue";
 import PartyMemberStats from "@/Components/PartyMemberStats.vue";
 import ProfilePicture from "@/Components/ProfilePicture.vue";
+import type { Item } from "@/types/item";
+import type { Character } from "@/types/character";
 import { useCharacterStore } from "@/stores/useCharactersStore";
+import { useItemStore } from "@/stores/useItemStore";
+import { ref, computed } from "vue";
+import { storeToRefs } from "pinia";
 
 const store = useCharacterStore();
-const { characters, partyMembers, nonPartyMembers } = store;
+const itemStore = useItemStore();
+const { items, selectedItemId, itemsWithStock } = storeToRefs(itemStore);
+const { decrementStock } = itemStore;
+const { characters, partyMembers } = storeToRefs(store);
+const { useItem, useItemsOnAllPartyMembers } = store;
+const itemSelected = ref(-1);
+const handleItemSelected = (id: number) => {
+  itemSelected.value = id;
+};
+
+const showRadioButtons = computed(() => {
+  return selectedItemId.value !== null && selectedItemId.value !== -1
+    ? "visible"
+    : "hidden";
+});
+
+const handleItemUsage = (charId: number) => {
+  // 2. Check the .value of the ref
+  if (selectedItemId.value === null || selectedItemId.value === -1) {
+    return;
+  }
+
+  // 3. Use .value to access the actual array and the ID
+  const item = items.value.find((i) => i.id === selectedItemId.value);
+  const selectedCharacter = characters.value.find((char) => char.id === charId);
+
+  if (item && selectedCharacter) {
+    if (item.multiMember) {
+      useItemsOnAllPartyMembers(item.statImpacted, item.statImpactNumber);
+    } else {
+      // Pass the actual ID
+      useItem(selectedCharacter.id, item.statImpacted, item.statImpactNumber);
+    }
+    decrementStock(selectedItemId.value);
+  }
+};
 </script>
 
 <template>
@@ -22,7 +63,11 @@ const { characters, partyMembers, nonPartyMembers } = store;
     <div class="row descRow"></div>
     <div class="row bodyRow">
       <div class="subcolumn">
-        <div v-for="character in partyMembers" class="row characterRow">
+        <div
+          v-for="character in partyMembers"
+          class="row characterRow"
+          @click="handleItemUsage(character.id)"
+        >
           <ProfilePicture :image-name="character.imagePath" />
           <div class="subcolumn stats">
             <PartyMemberStats
@@ -36,7 +81,9 @@ const { characters, partyMembers, nonPartyMembers } = store;
           </div>
         </div>
       </div>
-      <div class="subcolumn"></div>
+      <div class="subcolumn">
+        <ItemList />
+      </div>
     </div>
   </div>
 </template>
@@ -46,16 +93,18 @@ div {
   border: 1px solid white;
 }
 
-.column {
+/* .column {
   display: flex;
   flex-direction: column;
   height: 82.5vh;
   width: 65vw;
-}
+} */
 
 .row {
   display: flex;
   flex-direction: row;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .bodyRow {
@@ -66,7 +115,7 @@ div {
   justify-content: start;
   align-items: center;
   height: 33%;
-  margin-left: 5%;
+  margin-left: 2%;
 }
 
 .headerRow,
@@ -116,5 +165,11 @@ button {
 
 .stats {
   padding-left: 2rem;
+}
+
+input {
+  width: 30px;
+  height: 30px;
+  visibility: v-bind(showRadioButtons);
 }
 </style>

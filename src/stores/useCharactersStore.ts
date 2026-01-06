@@ -94,5 +94,45 @@ export const useCharacterStore = defineStore("characters", () => {
     return characters.value.filter((char) => !char.inParty);
   });
 
-  return { characters, partyMembers, nonPartyMembers };
+  const useItem = (id: number, stat: string, value: number) => {
+    if (value === 0) {
+      return;
+    }
+    if (stat === "hp" || stat === "mp") {
+      const character: Character | undefined = characters.value.find(
+        (char) => char.id === id
+      );
+      if (character) {
+        if (stat === "hp") {
+          character.currentHp = Math.min(
+            character.maxHp,
+            character.currentHp + value
+          );
+        } else if (stat === "mp") {
+          character.currentMp = Math.min(
+            character.maxMp,
+            character.currentMp + value
+          );
+        } else {
+          return characters;
+        }
+      }
+    }
+    return characters;
+  };
+
+  const useItemsOnAllPartyMembers = (stat: string, value: number) => {
+    for (const character of characters.value) {
+      useItem(character.id, stat, value);
+    }
+    return characters;
+  };
+
+  return {
+    characters,
+    partyMembers,
+    nonPartyMembers,
+    useItem,
+    useItemsOnAllPartyMembers,
+  };
 });
