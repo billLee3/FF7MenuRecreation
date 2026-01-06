@@ -2,16 +2,37 @@
 import { useCharacterStore } from "@/stores/useCharactersStore";
 import { useItemStore } from "@/stores/useItemStore";
 import type { Item } from "@/types/item";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
 interface Props {
   item: Item;
 }
+
+let hover = ref(false);
+let hoveredId = ref(-1);
 const props = defineProps<Props>();
 const itemStore = useItemStore();
 const { selectItem } = itemStore;
-// const emits = defineEmits<{
-//   itemId: [id: number];
-// }>();
+const { itemHover, selectedItemId } = storeToRefs(itemStore);
+const toggleHover = (id: number) => {
+  hover.value = !hover.value;
+  if (hover.value === false) {
+    hoveredId.value = -1;
+  } else {
+    hoveredId.value = id;
+  }
+};
+
+// const toggleAndUpdateStore = (id: number) => {
+//   toggleHover(id);
+//   itemHover.value = hover.value;
+//   if (hoveredId.value > 0) {
+//     itemHovered(itemHover.value, hoveredId.value);
+//   } else {
+//     itemHovered(itemHover.value, hoveredId.value);
+//   }
+// };
 </script>
 
 <template>

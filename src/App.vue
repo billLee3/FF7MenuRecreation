@@ -2,16 +2,12 @@
 import GameStats from "./Components/GameStats.vue";
 import Location from "./Components/Location.vue";
 import { ref } from "vue";
-import router from "./router";
+import { useRouter } from "vue-router";
 // Also need the players objects in global state.
 // Global state not related to specific components more than 1 level down the DOM tree.
 const location = ref("Nibelheim");
 const timePlayed = ref("05:10:32");
 const gil = ref(14510);
-
-function redirectToAbout() {
-  router.push("/about");
-}
 </script>
 
 <template>

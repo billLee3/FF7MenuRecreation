@@ -44,6 +44,7 @@ const handleItemUsage = (charId: number) => {
       useItem(selectedCharacter.id, item.statImpacted, item.statImpactNumber);
     }
     decrementStock(selectedItemId.value);
+    selectedItemId.value = null;
   }
 };
 </script>
@@ -60,7 +61,9 @@ const handleItemUsage = (charId: number) => {
       </div>
       <div class="pageNameCol">Items</div>
     </div>
-    <div class="row descRow"></div>
+    <div class="row descRow">
+      <p>Placeholder for description</p>
+    </div>
     <div class="row bodyRow">
       <div class="subcolumn">
         <div
@@ -89,16 +92,23 @@ const handleItemUsage = (charId: number) => {
 </template>
 
 <style scoped>
-div {
+.itemSelectionRow,
+.pageNameCol,
+.descRow,
+.bodyRow,
+.subcolumn {
   border: 1px solid white;
 }
-
 /* .column {
   display: flex;
   flex-direction: column;
   height: 82.5vh;
   width: 65vw;
 } */
+
+.stats {
+  border: none;
+}
 
 .row {
   display: flex;
@@ -161,6 +171,8 @@ button {
   width: 10vw;
   background-color: transparent;
   color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
 }
 
 .stats {
@@ -171,5 +183,11 @@ input {
   width: 30px;
   height: 30px;
   visibility: v-bind(showRadioButtons);
+}
+
+button:hover {
+  background-color: white;
+  color: darkblue;
+  border: 1px solid darkblue;
 }
 </style>

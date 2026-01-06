@@ -70,5 +70,14 @@ export const useItemStore = defineStore("items", () => {
     return items.value.filter((i) => i.stock > 0);
   });
 
-  return { items, decrementStock, selectedItemId, selectItem, itemsWithStock };
+  let itemHover: boolean = false;
+
+  return {
+    items,
+    decrementStock,
+    selectedItemId,
+    selectItem,
+    itemsWithStock,
+    itemHover,
+  };
 });
