@@ -82,7 +82,7 @@ const toggleKeyItems = () => {
       <div class="pageNameCol">Items</div>
     </div>
     <div class="row descRow">
-      {{ itemDescription }}
+      <em>{{ itemDescription }}</em>
     </div>
     <div class="row bodyRow">
       <div class="subcolumn">
