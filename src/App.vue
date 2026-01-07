@@ -102,13 +102,25 @@ const gil = ref(14510);
   text-decoration: none;
   font-style: "Reactor7", sans-serif;
   padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 2rem;
   font-size: 2rem;
   list-style-type: none;
+}
+
+.routerLink:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease-in;
+}
+
+.routerLink:active {
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease-out;
 }
 .navBar {
   display: flex;
   flex-direction: column;
-  margin-left: 3em;
+  /* margin-left: 3em; */
   margin-top: 5px;
   gap: 0;
 }

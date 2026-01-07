@@ -6,14 +6,14 @@ export const useItemStore = defineStore("items", () => {
   const selectedItemId = ref<number | null>(null);
   const selectItem = (id: number) => {
     selectedItemId.value = id;
-    alert(`Select a character`);
+    getSelectedItemDescription(id);
   };
 
   const items = ref<Item[]>([
     {
       id: 1,
       name: "potion",
-      description: "Heals one party member 20 hit points",
+      description: "Select one party member to restore 20 hit points",
       stock: 99,
       statImpacted: "hp",
       statImpactNumber: 20,
@@ -23,7 +23,8 @@ export const useItemStore = defineStore("items", () => {
     {
       id: 2,
       name: "tent",
-      description: "Heals all party members by 500 hit points",
+      description:
+        "Select any character to restore 500 hit points to all party members",
       stock: 50,
       statImpacted: "hp",
       statImpactNumber: 500,
@@ -33,7 +34,7 @@ export const useItemStore = defineStore("items", () => {
     {
       id: 3,
       name: "ether",
-      description: "Restores 20 mp for one party member",
+      description: "Select one party member to restore 20 magic points",
       stock: 2,
       statImpacted: "mp",
       statImpactNumber: 20,
@@ -66,12 +67,45 @@ export const useItemStore = defineStore("items", () => {
     return items;
   };
 
+  const itemDescription = ref("");
+
+  const getSelectedItemDescription = (id: number) => {
+    const itemToDescribe: Item | undefined = items.value.find(
+      (item) => item.id === id
+    );
+    if (itemToDescribe) {
+      itemDescription.value = `${itemToDescribe.name.toUpperCase()}: ${
+        itemToDescribe.description
+      }`;
+    } else {
+      itemDescription.value = "";
+    }
+  };
+
   const itemsWithStock = computed(() => {
-    return items.value.filter((i) => i.stock > 0);
+    const itemsWithStock: Item[] = items.value.filter((i) => i.stock > 0);
+    if (isArranged.value === true && isKeyItems.value === true) {
+      const keyItems = itemsWithStock.filter((i) => i.keyItem === true);
+      keyItems.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      return keyItems;
+    } else if (isArranged.value === true && isKeyItems.value === false) {
+      itemsWithStock.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      return itemsWithStock.filter((i) => i.keyItem === false);
+    } else if (isArranged.value === false && isKeyItems.value === true) {
+      return itemsWithStock.filter((i) => i.keyItem === true);
+    }
+    return itemsWithStock.filter((i) => i.keyItem === false);
   });
 
+  const isSelectable = ref(false);
   let itemHover: boolean = false;
 
+  const isArranged = ref(false);
+  const isKeyItems = ref(false);
   return {
     items,
     decrementStock,
@@ -79,5 +113,9 @@ export const useItemStore = defineStore("items", () => {
     selectItem,
     itemsWithStock,
     itemHover,
+    isSelectable,
+    isArranged,
+    isKeyItems,
+    itemDescription,
   };
 });

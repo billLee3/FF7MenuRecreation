@@ -14,7 +14,7 @@ let hoveredId = ref(-1);
 const props = defineProps<Props>();
 const itemStore = useItemStore();
 const { selectItem } = itemStore;
-const { itemHover, selectedItemId } = storeToRefs(itemStore);
+const { itemHover, selectedItemId, isSelectable } = storeToRefs(itemStore);
 const toggleHover = (id: number) => {
   hover.value = !hover.value;
   if (hover.value === false) {
@@ -36,7 +36,15 @@ const toggleHover = (id: number) => {
 </script>
 
 <template>
-  <div class="row" @click="selectItem(props.item.id)">
+  <div v-if="!isSelectable" class="row" @click="selectItem(props.item.id)">
+    <p>{{ props.item.name }}</p>
+    <p class="stock">:{{ props.item.stock }}</p>
+  </div>
+  <div
+    v-if="isSelectable"
+    class="row selectable"
+    @click="selectItem(props.item.id)"
+  >
     <p>{{ props.item.name }}</p>
     <p class="stock">:{{ props.item.stock }}</p>
   </div>
@@ -51,6 +59,15 @@ const toggleHover = (id: number) => {
   padding-right: 50%;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.selectable:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+.selectable:active {
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.1s ease;
 }
 .stock {
   margin-left: 5rem;

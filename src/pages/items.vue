@@ -11,7 +11,15 @@ import { storeToRefs } from "pinia";
 
 const store = useCharacterStore();
 const itemStore = useItemStore();
-const { items, selectedItemId, itemsWithStock } = storeToRefs(itemStore);
+const {
+  items,
+  selectedItemId,
+  itemsWithStock,
+  isSelectable,
+  isArranged,
+  isKeyItems,
+  itemDescription,
+} = storeToRefs(itemStore);
 const { decrementStock } = itemStore;
 const { characters, partyMembers } = storeToRefs(store);
 const { useItem, useItemsOnAllPartyMembers } = store;
@@ -47,6 +55,18 @@ const handleItemUsage = (charId: number) => {
     selectedItemId.value = null;
   }
 };
+
+const toggleSelectable = () => {
+  isSelectable.value = !isSelectable.value;
+};
+
+const toggleArrange = () => {
+  isArranged.value = !isArranged.value;
+};
+
+const toggleKeyItems = () => {
+  isKeyItems.value = !isKeyItems.value;
+};
 </script>
 
 <template>
@@ -54,15 +74,15 @@ const handleItemUsage = (charId: number) => {
     <div class="row headerRow">
       <div class="hdrColumnMain">
         <div class="row itemSelectionRow">
-          <button>Use</button>
-          <button>Arrange</button>
-          <button>Key Items</button>
+          <button @click="toggleSelectable">Use</button>
+          <button @click="toggleArrange">Arrange</button>
+          <button @click="toggleKeyItems">Key Items</button>
         </div>
       </div>
       <div class="pageNameCol">Items</div>
     </div>
     <div class="row descRow">
-      <p>Placeholder for description</p>
+      {{ itemDescription }}
     </div>
     <div class="row bodyRow">
       <div class="subcolumn">
@@ -121,6 +141,12 @@ const handleItemUsage = (charId: number) => {
   height: 67.5vh;
 }
 
+.descRow {
+  align-items: center;
+  font-size: 2rem;
+  padding-left: 3rem;
+}
+
 .characterRow {
   justify-content: start;
   align-items: center;
@@ -128,6 +154,14 @@ const handleItemUsage = (charId: number) => {
   margin-left: 2%;
 }
 
+.characterRow:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+.characterRow:active {
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.1s ease;
+}
 .headerRow,
 .descRow,
 .itemSelectionRow {
@@ -186,8 +220,16 @@ input {
 }
 
 button:hover {
-  background-color: white;
-  color: darkblue;
-  border: 1px solid darkblue;
+  background-color: rgb(26, 26, 159);
+  color: white;
+  border: 1px solid white;
+  transition: background-color 0.3s ease-in;
+}
+
+button:active {
+  background-color: rgb(46, 46, 206);
+  color: whitesmoke;
+  border: 2px solid white;
+  transition: background-color 0.1s ease-out;
 }
 </style>
