@@ -19,7 +19,7 @@ const gil = ref(14510);
       <div class="navBar">
         <RouterLink to="/" class="routerLink">Home</RouterLink>
         <RouterLink to="/items" class="routerLink">Items</RouterLink>
-        <RouterLink to="/materia" class="routerLink">Materia</RouterLink>
+        <RouterLink to="/party" class="routerLink">Party</RouterLink>
         <RouterLink to="/about" class="routerLink">About</RouterLink>
       </div>
     </div>

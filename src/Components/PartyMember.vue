@@ -7,6 +7,7 @@ import { ref, computed } from "vue";
 
 interface Props {
   character: Character;
+  full: boolean;
 }
 const props = defineProps<Props>();
 // const lmtString = ref(`Limit level ${props.character.limitLvl}`);
@@ -17,8 +18,22 @@ const lmtString = computed(() => {
 </script>
 
 <template>
-  <ProfilePicture :image-name="props.character.imagePath" />
-  <div class="statsColumn">
+  <ProfilePicture
+    :image-name="props.character.imagePath"
+    :front="props.character.front"
+    page="main"
+  />
+  <div v-if="props.full === true" class="statsColumn">
+    <PartyMemberStats
+      :name="props.character.name"
+      :level="props.character.level"
+      :hp-max="props.character.maxHp"
+      :hp-remaining="props.character.currentHp"
+      :mp-max="props.character.maxMp"
+      :mp-remaining="props.character.currentMp"
+    />
+  </div>
+  <div v-else class="statsColumnExpand">
     <PartyMemberStats
       :name="props.character.name"
       :level="props.character.level"
@@ -29,7 +44,7 @@ const lmtString = computed(() => {
     />
   </div>
 
-  <div class="column">
+  <div v-if="props.full === true" class="column">
     <ProgressBar
       title="next level"
       :current="props.character.currentExpToNextLvl"
@@ -55,6 +70,14 @@ const lmtString = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding-left: 2rem;
+}
+
+.statsColumnExpand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 75%;
   padding-left: 2rem;
 }
 </style>

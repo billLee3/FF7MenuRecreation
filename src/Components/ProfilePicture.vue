@@ -1,14 +1,27 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
-const props = defineProps(["imageName"]);
+// const props = defineProps(["imageName"]);
+
+interface Props {
+  imageName: string;
+  front: boolean;
+  page: string;
+}
+const props = defineProps<Props>();
 const imgSrc = computed(() => {
   return new URL(`../assets/${props.imageName}`, import.meta.url).href;
 });
 </script>
 
 <template>
-  <img :src="imgSrc" alt="Dynamic Profile" />
+  <img
+    v-if="page === 'main' && front === false"
+    :src="imgSrc"
+    alt="Dynamic Profile"
+    class="back"
+  />
+  <img v-else :src="imgSrc" alt="Dynamic Profile" />
 </template>
 
 <style scoped>
@@ -19,5 +32,9 @@ img {
   object-position: top;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+}
+
+.back {
+  padding-left: 5%;
 }
 </style>

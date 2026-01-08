@@ -91,7 +91,11 @@ const toggleKeyItems = () => {
           class="row characterRow"
           @click="handleItemUsage(character.id)"
         >
-          <ProfilePicture :image-name="character.imagePath" />
+          <ProfilePicture
+            :image-name="character.imagePath"
+            :front="character.front"
+            page="other"
+          />
           <div class="subcolumn stats">
             <PartyMemberStats
               :name="character.name"

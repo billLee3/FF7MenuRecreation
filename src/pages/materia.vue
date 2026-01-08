@@ -80,6 +80,7 @@ import ProfilePicture from "@/Components/ProfilePicture.vue";
   justify-content: space-between;
   padding-left: 5%;
   padding-right: 5%;
+  height: 100%;
 }
 
 .CharacterMateriaRow {
@@ -106,10 +107,15 @@ import ProfilePicture from "@/Components/ProfilePicture.vue";
 }
 
 .pageNameCol {
-  justify-content: center;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-end;
   padding-left: 2rem;
+  padding-right: 2rem;
   font-size: 2.5rem;
+  height: 100%;
+  width: 15%;
 }
 
 .bodyRow {
@@ -132,5 +138,6 @@ import ProfilePicture from "@/Components/ProfilePicture.vue";
 
 .hdrColumnMain {
   width: 85%;
+  height: 100%;
 }
 </style>
