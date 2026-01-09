@@ -82,7 +82,7 @@ const toggleKeyItems = () => {
       <div class="pageNameCol">Items</div>
     </div>
     <div class="row descRow">
-      {{ itemDescription }}
+      <em>{{ itemDescription }}</em>
     </div>
     <div class="row bodyRow">
       <div class="subcolumn">
@@ -91,7 +91,11 @@ const toggleKeyItems = () => {
           class="row characterRow"
           @click="handleItemUsage(character.id)"
         >
-          <ProfilePicture :image-name="character.imagePath" />
+          <ProfilePicture
+            :image-name="character.imagePath"
+            :front="character.front"
+            page="other"
+          />
           <div class="subcolumn stats">
             <PartyMemberStats
               :name="character.name"

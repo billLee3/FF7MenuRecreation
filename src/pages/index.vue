@@ -10,24 +10,12 @@ import { ref } from "vue";
 const location = ref("Nibelheim");
 const timePlayed = ref("05:10:32");
 const gil = ref(14510);
+const page = ref("home");
+const fullVar = true;
 </script>
 
 <template>
-  <PartyMembers />
-  <!-- <div class="container">
-    <div class="menu-box party-members">
-      <PartyMembers />
-    </div>
-    <div class="menu-box selections-list">
-      <SelectionList :selections="selectionList" />
-    </div>
-    <div class="menu-box time-stats">
-      <GameStats :time-played="timePlayed" :gil />
-    </div>
-    <div class="menu-box location-box">
-      <Location :location="location" />
-    </div>
-  </div> -->
+  <PartyMembers :full="fullVar" :page="page" />
 </template>
 
 <style scoped>

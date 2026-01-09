@@ -15,4 +15,5 @@ export interface Character {
   currentExpToNextLvl: number;
   imagePath: string;
   inParty: boolean;
+  front: boolean;
 }

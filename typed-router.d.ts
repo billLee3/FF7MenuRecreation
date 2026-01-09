@@ -51,6 +51,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/party': RouteRecordInfo<
+      '/party',
+      '/party',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
   }
 
   /**
@@ -85,6 +92,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/materia.vue': {
       routes:
         | '/materia'
+      views:
+        | never
+    }
+    'src/pages/party.vue': {
+      routes:
+        | '/party'
       views:
         | never
     }

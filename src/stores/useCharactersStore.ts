@@ -19,6 +19,7 @@ export const useCharacterStore = defineStore("characters", () => {
       currentExpToNextLvl: 200,
       imagePath: "CloudProfile.png",
       inParty: true,
+      front: true,
     },
     {
       id: 2,
@@ -35,6 +36,7 @@ export const useCharacterStore = defineStore("characters", () => {
       currentExpToNextLvl: 200,
       imagePath: "AerithProfile.png",
       inParty: false,
+      front: true,
     },
     {
       id: 3,
@@ -51,6 +53,7 @@ export const useCharacterStore = defineStore("characters", () => {
       currentExpToNextLvl: 200,
       imagePath: "RedXIIIProfile.png",
       inParty: true,
+      front: true,
     },
     {
       id: 4,
@@ -67,6 +70,7 @@ export const useCharacterStore = defineStore("characters", () => {
       currentExpToNextLvl: 200,
       imagePath: "BarrettProfile.png",
       inParty: true,
+      front: false,
     },
     {
       id: 5,
@@ -83,6 +87,75 @@ export const useCharacterStore = defineStore("characters", () => {
       currentExpToNextLvl: 600,
       imagePath: "TifaProfile.png",
       inParty: false,
+      front: true,
+    },
+    {
+      id: 6,
+      name: "Vincent",
+      level: 30,
+      maxHp: 500,
+      currentHp: 400,
+      maxMp: 250,
+      currentMp: 150,
+      limitLvl: 1,
+      limitExpMax: 300,
+      limitExpCurrent: 200,
+      expTotalToNextLvl: 1000,
+      currentExpToNextLvl: 600,
+      imagePath: "Vincent.png",
+      inParty: false,
+      front: true,
+    },
+    {
+      id: 7,
+      name: "Cait Sith",
+      level: 21,
+      maxHp: 500,
+      currentHp: 400,
+      maxMp: 250,
+      currentMp: 150,
+      limitLvl: 1,
+      limitExpMax: 300,
+      limitExpCurrent: 200,
+      expTotalToNextLvl: 1000,
+      currentExpToNextLvl: 600,
+      imagePath: "CaitSith.png",
+      inParty: false,
+      front: true,
+    },
+    {
+      id: 8,
+      name: "Yuffie",
+      level: 16,
+      maxHp: 500,
+      currentHp: 400,
+      maxMp: 250,
+      currentMp: 150,
+      limitLvl: 1,
+      limitExpMax: 300,
+      limitExpCurrent: 200,
+      expTotalToNextLvl: 1000,
+      currentExpToNextLvl: 600,
+      imagePath: "YuffieProfile.png",
+      inParty: false,
+      front: true,
+    },
+    {
+      id: 9,
+      name: "Cid",
+      level: 21,
+      maxHp: 500,
+      currentHp: 400,
+      maxMp: 250,
+      currentMp: 150,
+      limitLvl: 1,
+      limitExpMax: 300,
+      limitExpCurrent: 200,
+      expTotalToNextLvl: 1000,
+      currentExpToNextLvl: 600,
+      imagePath: "Cid.png",
+      inParty: false,
+      front: true,
     },
   ]);
 
@@ -128,11 +201,51 @@ export const useCharacterStore = defineStore("characters", () => {
     return characters;
   };
 
+  const hoverCharacter = ref();
+  const getCharacterById = (id: number) => {
+    const character: Character | undefined = characters.value.find(
+      (char) => char.id === id
+    );
+    if (character) {
+      hoverCharacter.value = character;
+    }
+  };
+
+  const hoverId = ref(-1);
+  const toPartySelected = ref(-1);
+  const toggleCharacterPartyStatus = (id: number) => {
+    const partyMember = partyMembers.value.find((char) => char.id === id);
+    if (partyMembers.value.length === 3) {
+      if (partyMember) {
+        partyMember.inParty = false;
+      } else {
+        alert("You can't have more than 3 party members.");
+      }
+    }
+  };
+
+  const moveNonPartyToParty = (id: number) => {
+    if (partyMembers.value.length < 3) {
+      if (id !== -1) {
+        const character = characters.value.find((char) => char.id === id);
+        if (character) {
+          character.inParty = true;
+        } else {
+          alert("This id is out of bounds.");
+        }
+      }
+    }
+  };
   return {
     characters,
     partyMembers,
     nonPartyMembers,
     useItem,
     useItemsOnAllPartyMembers,
+    hoverId,
+    getCharacterById,
+    hoverCharacter,
+    toggleCharacterPartyStatus,
+    moveNonPartyToParty,
   };
 });
