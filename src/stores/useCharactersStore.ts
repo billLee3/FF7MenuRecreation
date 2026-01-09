@@ -212,7 +212,30 @@ export const useCharacterStore = defineStore("characters", () => {
   };
 
   const hoverId = ref(-1);
+  const toPartySelected = ref(-1);
+  const toggleCharacterPartyStatus = (id: number) => {
+    const partyMember = partyMembers.value.find((char) => char.id === id);
+    if (partyMembers.value.length === 3) {
+      if (partyMember) {
+        partyMember.inParty = false;
+      } else {
+        alert("You can't have more than 3 party members.");
+      }
+    }
+  };
 
+  const moveNonPartyToParty = (id: number) => {
+    if (partyMembers.value.length < 3) {
+      if (id !== -1) {
+        const character = characters.value.find((char) => char.id === id);
+        if (character) {
+          character.inParty = true;
+        } else {
+          alert("This id is out of bounds.");
+        }
+      }
+    }
+  };
   return {
     characters,
     partyMembers,
@@ -222,5 +245,7 @@ export const useCharacterStore = defineStore("characters", () => {
     hoverId,
     getCharacterById,
     hoverCharacter,
+    toggleCharacterPartyStatus,
+    moveNonPartyToParty,
   };
 });

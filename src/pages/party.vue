@@ -9,10 +9,10 @@ import type { Character } from "@/types/character";
 
 const store = useCharacterStore();
 const { nonPartyMembers, hoverId, hoverCharacter } = storeToRefs(store);
-const { getCharacterById } = store;
+const { getCharacterById, moveNonPartyToParty } = store;
 const fullVar = false;
 
-const page = ref("");
+const page = ref("party");
 const hoverHandler = (id: number) => {
   hoverId.value = id;
   getCharacterById(id);
@@ -48,6 +48,7 @@ const full = ref(false);
               v-for="character in nonPartyMembers"
               class="imageContainer"
               @mouseenter="hoverHandler(character.id)"
+              @click="moveNonPartyToParty(character.id)"
             >
               <ProfilePicture
                 :image-name="character.imagePath"

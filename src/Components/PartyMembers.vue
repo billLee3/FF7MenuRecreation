@@ -3,20 +3,34 @@ import PartyMember from "./PartyMember.vue";
 import { computed, ref } from "vue";
 import type { Character } from "@/types/character";
 import { useCharacterStore } from "@/stores/useCharactersStore";
+import { storeToRefs } from "pinia";
 
 const store = useCharacterStore();
-const { partyMembers } = store;
+const { partyMembers, characters, hoverId, hoverCharacter } =
+  storeToRefs(store);
+const { toggleCharacterPartyStatus } = store;
 // const props = defineProps(["page"]);
 interface Props {
   page: string;
   full: boolean;
 }
 const props = defineProps<Props>();
+
+// const handleRemoveFromParty = (id: number) {
+
+// }
 </script>
 
 <template>
   <div v-for="(character, index) in partyMembers" :key="index" class="column">
-    <div v-if="page === 'order'" class="row selectable">
+    <div v-if="props.page === 'order'" class="row selectable">
+      <PartyMember :full="props.full" :character :key="index" />
+    </div>
+    <div
+      v-else-if="props.page === 'party'"
+      class="row selectable"
+      @click="toggleCharacterPartyStatus(character.id)"
+    >
       <PartyMember :full="props.full" :character :key="index" />
     </div>
     <div v-else class="row">
